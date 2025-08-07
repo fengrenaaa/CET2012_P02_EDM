@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import static Utilities.InputValidation.*;
 
 public class Receiver {
 
@@ -19,9 +20,12 @@ public class Receiver {
         printData();
     }
 
-    public String delete(String index) {
-        System.out.println("Delete # " + index);
+    public String delete(String index) throws  CustomException {
         int listIndex = Integer.parseInt(index) - 1;
+        int listSize = dataStore.size() - 1;
+        if(invalidIndexRange(listIndex, listSize)){throw new CustomException("Invalid index " +
+                "range");}
+        System.out.println("Delete # " + index);
         String deletedData = dataStore.get(listIndex);
         dataStore.remove(listIndex);
         return deletedData;
@@ -33,17 +37,16 @@ public class Receiver {
         System.out.println("Undo");
     }
 
-    public String[] update(String params) {
-        String[] newFields = params.trim().split("\\s+");
-        int listIndex = Integer.parseInt(newFields[0]) - 1;
-        String currentData = dataStore.get(listIndex);
-        String[] oldFields = currentData.trim().split("\\s+");
-        for (int i = 1; i < newFields.length && i <= oldFields.length; i++){
-            oldFields[i - 1] = newFields[i];
-        }
-        String newData = String.join(" ", oldFields);
-        dataStore.set(listIndex, newData);
-        return new String[]{currentData, "" + listIndex};
+    public void update(int listIndex, String params, String input) throws CustomException{
+        int listSize = dataStore.size() - 1;
+        if(invalidIndexRange(listIndex, listSize)){throw new CustomException("Invalid index " +
+                "range");}
+        System.out.println("Update #" + input);
+        dataStore.set(listIndex, params);
+    }
+
+    public void revertUpdate(int listIndex, String original) {
+        dataStore.set(listIndex, original);
     }
 
     public ArrayList<String> getData() {
@@ -59,7 +62,5 @@ public class Receiver {
 //        }
     }
 
-    public void revertUpdate(String listIndex, String original) {
-        dataStore.set(Integer.parseInt(listIndex), original);
-    }
+
 }

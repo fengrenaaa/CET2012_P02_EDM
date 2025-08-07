@@ -10,7 +10,7 @@ public class Invoker {
         this.cmdToExecute = cmdToExecute;
     }
 
-    public void executeCommand(Stack<Command> history) {
+    public void executeCommand(Stack<Command> history) throws CustomException{
         for (Command cmd : cmdToExecute) {
             cmd.execute();
             if (cmd.shouldRecord()) {

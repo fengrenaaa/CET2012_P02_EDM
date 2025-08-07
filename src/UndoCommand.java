@@ -7,7 +7,7 @@ public class UndoCommand implements Command{
     }
 
     @Override
-    public void execute() {
+    public void execute() throws CustomException {
         if (!history.empty()) {
             Command cmd = history.pop();
             cmd.undo();

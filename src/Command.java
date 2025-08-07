@@ -1,5 +1,5 @@
 public interface Command {
-    void execute();
-    void undo();
+    void execute() throws CustomException;
+    void undo() throws CustomException;
     boolean shouldRecord();
 }
