@@ -1,5 +1,3 @@
-import java.util.Arrays;
-
 import static Utilities.InputValidation.*;
 
 public class UpdateCommand implements Command {
