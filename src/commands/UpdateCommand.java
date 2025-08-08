@@ -80,21 +80,23 @@ public class UpdateCommand implements Command {
      * @return true if valid; false otherwise.
      */
     private boolean validateInput(String input) throws CustomException{
-        if (isEmpty(input)){throw new CustomException("Input should not be empty");}
+        if (isEmpty(input)){throw new CustomException("Update: Input should not be empty");}
         inputs = parseInputToArray(input);
-        if(invalidUpdateLength(inputs)){throw new CustomException("Invalid update length");}
-        if(invalidIndexDataType(inputs[0])){throw new CustomException("Invalid index data type");}
+        if(invalidUpdateLength(inputs)){throw new CustomException("Update: Invalid update length");}
+        if(invalidIndexDataType(inputs[0])){throw new CustomException("Update: Invalid index data" +
+                " type");}
         listIndex = Integer.parseInt(inputs[0]) - 1;
 
         int listSize = receiver.getData().size() - 1;
-        if(invalidIndexRange(listIndex, listSize)){throw new CustomException("Invalid index " +
+        if(invalidIndexRange(listIndex, listSize)){throw new CustomException("Update: Invalid index " +
                 "range");}
 
         if(inputs.length >=2){inputs[1] = titledName(inputs[1]);}
         if(inputs.length >=3){inputs[2] = titledName(inputs[2]);}
         if(inputs.length ==4){
             int data3Validation = validateData3(inputs[2]);
-            if (data3Validation < 0){throw new CustomException("Email: "+inputs[3]+" is not " +
+            if (data3Validation < 0){throw new CustomException("Update Email: "+inputs[3]+" is " +
+                    "not " +
                     "valid");}
             if (data3Validation == 2){inputs[3] = titledName(inputs[3]);}
         }

@@ -70,14 +70,14 @@ public class DeleteCommand implements Command{
      * @return true if valid; false otherwise.
      */
     private boolean validateInput(String input) throws CustomException{
-        if(input.isEmpty()){throw new CustomException("Input should not be empty");}
+        if(input.isEmpty()){throw new CustomException("Delete: Input should not be empty");}
         String[] inputs = parseInputToArray(input);
-        if(invalidDeleteLength(inputs)){throw new CustomException("Invalid delete command length");}
-        if(invalidIndexDataType(inputs[0])){throw new CustomException("Invalid index data type");}
+        if(invalidDeleteLength(inputs)){throw new CustomException("Delete: Invalid delete command length");}
+        if(invalidIndexDataType(inputs[0])){throw new CustomException("Delete: Invalid index data type");}
         this.index = inputs[0];
         listIndex = Integer.parseInt(index) - 1;
         int listSize = receiver.getData().size() - 1;
-        if(invalidIndexRange(listIndex, listSize)){throw new CustomException("Invalid index " +
+        if(invalidIndexRange(listIndex, listSize)){throw new CustomException("Delete: Invalid index " +
                 "range");}
         return true;
     }

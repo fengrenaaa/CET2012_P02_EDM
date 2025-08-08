@@ -31,7 +31,6 @@ public class Invoker {
             }
         }catch(CustomException e){
             System.err.println(e.getMessage());
-            throw new RuntimeException("Command Failed", e);
         }
 
     }
