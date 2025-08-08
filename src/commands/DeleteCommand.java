@@ -6,26 +6,19 @@ import customexception.CustomException;
 
 public class DeleteCommand implements Command{
     private Receiver receiver;
+    private String temp;
     private String index;
     private String params;
     private int listIndex;
 
     public DeleteCommand(Receiver receiver, String index) {
         this.receiver = receiver;
-        try{
-            if(validateInput(index)){
-                this.index = index;
-            }
-        }catch (CustomException e){throw new RuntimeException("Delete command construction failed",
-                e);}
+        this.temp = index;
     }
     @Override
     public void execute() throws CustomException {
+        validateInput(temp);
         System.out.println("Delete # " + index);
-        listIndex = Integer.parseInt(index) - 1;
-        int listSize = receiver.getData().size() - 1;
-        if(invalidIndexRange(listIndex, listSize)){throw new CustomException("Invalid index " +
-                "range");}
         this.params = receiver.delete(listIndex);
     }
 
@@ -43,6 +36,11 @@ public class DeleteCommand implements Command{
         String[] inputs = parseInputToArray(input);
         if(invalidDeleteLength(inputs)){throw new CustomException("Invalid delete command length");}
         if(invalidIndexDataType(inputs[0])){throw new CustomException("Invalid index data type");}
+        this.index = inputs[0];
+        listIndex = Integer.parseInt(index) - 1;
+        int listSize = receiver.getData().size() - 1;
+        if(invalidIndexRange(listIndex, listSize)){throw new CustomException("Invalid index " +
+                "range");}
         return true;
     }
 }

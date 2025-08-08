@@ -5,9 +5,6 @@ import customexception.CustomException;
 
 public class Invoker {
     private Command[] cmdToExecute;
-//    public Invoker(Command command) {
-//        this.command = command;
-//    }
 
     public void setCommandsForExecution(Command[] cmdToExecute) {
         this.cmdToExecute = cmdToExecute;

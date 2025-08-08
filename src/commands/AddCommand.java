@@ -6,16 +6,16 @@ import customexception.CustomException;
 public class AddCommand implements Command {
     private Receiver receiver;
     private String params;
+    private String temp;
     private int listIndex;
 
     public AddCommand(Receiver receiver, String params){
         this.receiver = receiver;
-        try{
-            this.params = validateInput(params);
-        }catch(CustomException e){throw new RuntimeException("Add command construction failed", e);}
+        this.temp = params;
     }
     @Override
     public void execute() throws CustomException{
+        this.params = validateInput(temp);
         System.out.println("add");
         this.listIndex = receiver.getData().size();
         receiver.add(listIndex, params);

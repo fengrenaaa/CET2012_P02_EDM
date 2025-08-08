@@ -1,10 +1,22 @@
 package receiver;
 
+import fileoperation.FileReadWrite;
+
+import java.io.IOException;
 import java.util.ArrayList;
+import static fileoperation.FileReadWrite.*;
 
 public class Receiver {
 
-    private ArrayList<String> dataStore = new ArrayList<>();
+    private ArrayList<String> dataStore;
+
+    public Receiver(){
+        dataStore = FileReadWrite.readFile();
+    }
+
+    public Receiver(ArrayList<String> dataStore) {
+        this.dataStore = dataStore;
+    }
 
     public void add(int listIndex, String params) {
         dataStore.add(listIndex, params);

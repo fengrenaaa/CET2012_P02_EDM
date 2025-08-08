@@ -6,6 +6,7 @@ import customexception.CustomException;
 
 public class UpdateCommand implements Command {
     private Receiver receiver;
+    private String temp;
     private String params;
     private String original;
     private int listIndex;
@@ -13,23 +14,18 @@ public class UpdateCommand implements Command {
 
     public UpdateCommand(Receiver receiver, String params){
         this.receiver = receiver;
-        try{
-            if (validateInput(params)) {
-                this.original = receiver.getData().get(listIndex);
-                this.params = constructNewParams();
-            }
-        }catch(CustomException e){throw new RuntimeException("Update command construction failed",
-                e);}
-
+        this.temp = params;
     }
+
     @Override
     public void execute() throws CustomException {
-        int listSize = receiver.getData().size() - 1;
-        if(invalidIndexRange(listIndex, listSize)){throw new CustomException("Invalid index " +
-                "range");}
+        validateInput(temp);
+        this.original = receiver.getData().get(listIndex);
+        this.params = constructNewParams();
         String input = String.join(" ", inputs);
         System.out.println("Update #" + input);
         receiver.update(listIndex, params);
+
     }
 
     @Override
@@ -47,6 +43,11 @@ public class UpdateCommand implements Command {
         if(invalidUpdateLength(inputs)){throw new CustomException("Invalid update length");}
         if(invalidIndexDataType(inputs[0])){throw new CustomException("Invalid index data type");}
         listIndex = Integer.parseInt(inputs[0]) - 1;
+
+        int listSize = receiver.getData().size() - 1;
+        if(invalidIndexRange(listIndex, listSize)){throw new CustomException("Invalid index " +
+                "range");}
+
         if(inputs.length >=2){inputs[1] = titledName(inputs[1]);}
         if(inputs.length >=3){inputs[2] = titledName(inputs[2]);}
         if(inputs.length ==4){
