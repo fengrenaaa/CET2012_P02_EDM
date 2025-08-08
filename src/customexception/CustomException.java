@@ -1,3 +1,5 @@
+package customexception;
+
 public class CustomException extends Exception {
     static final long serialVersionUID = 1L;
     public CustomException(String message) {

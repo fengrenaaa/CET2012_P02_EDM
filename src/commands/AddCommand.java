@@ -1,36 +1,39 @@
-import static Utilities.InputValidation.*;
+package commands;
+import static utilities.InputValidation.*;
+import receiver.Receiver;
+import customexception.CustomException;
 
 public class AddCommand implements Command {
     private Receiver receiver;
     private String params;
+    private int listIndex;
 
-    public AddCommand(Receiver receiver, String params) throws CustomException {
+    public AddCommand(Receiver receiver, String params){
         this.receiver = receiver;
-        this.params = validateInput(params);
+        try{
+            this.params = validateInput(params);
+        }catch(CustomException e){throw new RuntimeException("Add command construction failed", e);}
     }
     @Override
     public void execute() throws CustomException{
-//        String addedInput = String.format("%02d. "+ params+"\n", addedIndex);
-        receiver.add(params);
+        System.out.println("add");
+        this.listIndex = receiver.getData().size();
+        receiver.add(listIndex, params);
     }
 
     @Override
     public void undo() {
-        receiver.removeAdded();
+        System.out.println("undo Add");
+        receiver.delete(listIndex);
     }
 
     @Override
     public boolean shouldRecord() {return true;}
 
-    private String validateInput(String input) throws CustomException{
-//        if (input == null || input.isEmpty()) {
-//            throw new CustomException("Input should not be empty");
-//        }
+    private String validateInput(String input) throws CustomException {
         if(isEmpty(input)){throw new CustomException("Input should not be empty");}
-//        String[] inputs = input.trim().split("\\s+");
         String[] inputs = parseInputToArray(input);
         if (invalidAddLength(inputs)) {throw new CustomException("Input length should be 3");}
-//        if (invalidEmail(inputs[2])){throw new CustomException("Email is not valid");}
         int data3Validation = validateData3(inputs[2]);
         if (data3Validation < 0){throw new CustomException("Email: "+inputs[2]+" is not valid");}
         if (data3Validation == 2){inputs[2] = titledName(inputs[2]);}

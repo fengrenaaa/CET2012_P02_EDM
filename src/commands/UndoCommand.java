@@ -1,8 +1,15 @@
+package commands;
+
 import java.util.Stack;
+import receiver.Receiver;
+import customexception.CustomException;
 
 public class UndoCommand implements Command{
     private Stack<Command> history;
-    public UndoCommand(Stack<Command> history) {
+    private Receiver receiver;
+
+    public UndoCommand(Receiver receiver, Stack<Command> history) {
+        this.receiver = receiver;
         this.history = history;
     }
 
