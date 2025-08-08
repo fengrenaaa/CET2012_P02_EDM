@@ -101,9 +101,28 @@ public class InputValidation {
     public static String[] parseInputToArray(String input){
         return input.trim().split("\\s+");
     }
+
+    /**
+     * Capitalizes the first character of the input string.
+     *
+     * @param input the input string
+     * @return the string with the first character in uppercase
+     */
     public static String titledName(String input){
         return input.substring(0, 1).toUpperCase()+input.substring(1);
     }
+
+    /**
+     * Validates the third data field (e.g. email) in the input.
+     * <ul>
+     *     <li>Returns 1 if it matches a standard email format</li>
+     *     <li>Returns 2 if it matches a simple username format</li>
+     *     <li>Returns -1 if it's invalid</li>
+     * </ul>
+     *
+     * @param input the input string to validate
+     * @return 1 for full email, 2 for username only, -1 for invalid format
+     */
     public static int validateData3 (String input) {
         Pattern emailPattern = Pattern.compile(emailCheckRegex0);
         Pattern simplePattern = Pattern.compile(emailCheckRegex1);
