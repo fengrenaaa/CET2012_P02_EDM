@@ -94,7 +94,7 @@ public class UpdateCommand implements Command {
         if(inputs.length >=2){inputs[1] = titledName(inputs[1]);}
         if(inputs.length >=3){inputs[2] = titledName(inputs[2]);}
         if(inputs.length ==4){
-            int data3Validation = validateData3(inputs[2]);
+            int data3Validation = validateData3(inputs[3]);
             if (data3Validation < 0){throw new CustomException("Update Email: "+inputs[3]+" is " +
                     "not " +
                     "valid");}

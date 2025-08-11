@@ -79,7 +79,7 @@ public class InputValidation {
      * @return {@code true} if index is ≤ 0 or greater than size; {@code false} otherwise
      */
     public static boolean invalidIndexRange(int index, int size){
-        return index <= 0 || index > size;
+        return index < 0 || index > size;
     }
 
     /**

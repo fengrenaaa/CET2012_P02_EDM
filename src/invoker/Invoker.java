@@ -31,7 +31,7 @@ public class Invoker {
                 }
             }
             catch(CustomException e){
-                System.err.println(e.getMessage());
+                System.out.println(e.getMessage());
             }
         }
 

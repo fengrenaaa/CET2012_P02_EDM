@@ -27,7 +27,7 @@ public class Client {
         UndoCommand udc0 = new UndoCommand(receiver, history);
         invoker.setCommandsForExecution(new Command[]{udc0, list0});
         invoker.executeCommand(history);
-        UpdateCommand updc0 = new UpdateCommand(receiver, "-9 udfn upln   e3@update.cmd");
+        UpdateCommand updc0 = new UpdateCommand(receiver, "2 udfn upln   e3@update.cmd");
         invoker.setCommandsForExecution(new Command[]{updc0, list0});
         invoker.executeCommand(history);
         UndoCommand udc1 = new UndoCommand(receiver, history);
