@@ -109,7 +109,7 @@ public class InputValidation {
      * @return the string with the first character in uppercase
      */
     public static String titledName(String input){
-        return input.substring(0, 1).toUpperCase()+input.substring(1);
+        return input.substring(0, 1).toUpperCase()+input.substring(1).toLowerCase();
     }
 
     /**

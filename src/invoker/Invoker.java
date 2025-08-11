@@ -22,15 +22,17 @@ public class Invoker {
      * @param history the command history stack.
      */
     public void executeCommand(Stack<Command> history){
-        try{
-            for (Command cmd : cmdToExecute) {
+
+        for (Command cmd : cmdToExecute) {
+            try {
                 cmd.execute();
                 if (cmd.shouldRecord()) {
                     history.push(cmd);
                 }
             }
-        }catch(CustomException e){
-            System.err.println(e.getMessage());
+            catch(CustomException e){
+                System.err.println(e.getMessage());
+            }
         }
 
     }

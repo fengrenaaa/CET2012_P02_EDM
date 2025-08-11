@@ -8,37 +8,32 @@ import receiver.Receiver;
 import invoker.Invoker;
 import utilities.InputValidation;
 
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Client {
     public static void main(String[] args) {
 
         ArrayList<String> dataStore = FileReadWrite.readFile();
         Receiver receiver = new Receiver();
-        try{
-            AddCommand adc0 = new AddCommand(receiver, "fn ln abc@2.co");
-            AddCommand adc1 = new AddCommand(receiver, "fn1 ln1 e1@xxx.com");
-            AddCommand adc2 = new AddCommand(receiver, "fn2 ln2 e2@xxx.com");
-            ListCommand list0 = new ListCommand(receiver);
-            DeleteCommand dlc0 = new DeleteCommand(receiver, "10");
-            Invoker invoker = new Invoker();
-            invoker.setCommandsForExecution(new Command[]{adc0, adc1, adc2, list0, dlc0, list0});
-            Stack<Command> history = new Stack<>();
-            invoker.executeCommand(history);
-            UndoCommand udc0 = new UndoCommand(receiver, history);
-            invoker.setCommandsForExecution(new Command[]{udc0, udc0, list0});
-            invoker.executeCommand(history);
-            UpdateCommand updc0 = new UpdateCommand(receiver, "-9 udfn upln   e3@update.cmd");
-            invoker.setCommandsForExecution(new Command[]{updc0, list0});
-            invoker.executeCommand(history);
-            UndoCommand udc1 = new UndoCommand(receiver, history);
-            invoker.setCommandsForExecution(new Command[]{udc1, list0});
-            invoker.executeCommand(history);
-        }catch(RuntimeException e){
-            System.out.println(e.getMessage()+": "+e.getCause().getMessage());
-        }finally {
-            FileReadWrite.writeFile(receiver.getData());
-        }
+
+        AddCommand adc0 = new AddCommand(receiver, "Ha%^$##nna Moon tetter.tots@potatoesarelife" +
+                ".com");
+        AddCommand adc1 = new AddCommand(receiver, "fn1 ln1 e1@xxx.com");
+        AddCommand adc2 = new AddCommand(receiver, "fn2 ln2 e2@xxx.com");
+        ListCommand list0 = new ListCommand(receiver);
+        DeleteCommand dlc0 = new DeleteCommand(receiver, "2 ");
+        Invoker invoker = new Invoker();
+        invoker.setCommandsForExecution(new Command[]{adc0, adc1, adc2, list0, dlc0, list0});
+        Stack<Command> history = new Stack<>();
+        invoker.executeCommand(history);
+        UndoCommand udc0 = new UndoCommand(receiver, history);
+        invoker.setCommandsForExecution(new Command[]{udc0, list0});
+        invoker.executeCommand(history);
+        UpdateCommand updc0 = new UpdateCommand(receiver, "-9 udfn upln   e3@update.cmd");
+        invoker.setCommandsForExecution(new Command[]{updc0, list0});
+        invoker.executeCommand(history);
+        UndoCommand udc1 = new UndoCommand(receiver, history);
+        invoker.setCommandsForExecution(new Command[]{udc1, list0});
+        invoker.executeCommand(history);
+        FileReadWrite.writeFile(receiver.getData());
 
 //        String email = "aaa@bbb.ccc";
 //        System.out.println(email + " - " + InputValidation.validateData3(email));

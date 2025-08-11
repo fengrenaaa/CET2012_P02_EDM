@@ -75,7 +75,7 @@ public class Receiver {
      */
     private void printData() {
         for (int i = 0; i < dataStore.size(); i++) {
-            System.out.printf("%02d. "+dataStore.get(i)+"\n", i+1);
+            System.out.printf("%02d. %s"+"\n", i+1, dataStore.get(i));
         }
     }
 
